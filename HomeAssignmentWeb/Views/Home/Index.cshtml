@@ -1,0 +1,59 @@
+﻿@model IEnumerable<HomeAssignmentWeb.Models.Annons>
+
+<div class="container">
+	<div class="form-group">
+		<div class="input-group">
+			<div class="input-group-addon">
+				<i class="fa fa-search"></i>
+			</div>
+			@using (Html.BeginForm("Search", "Home"))
+			{
+				<input type="text" name="search" class="form-control" placeholder="Search">
+				<input type="submit" value="Submit" class="btn btn-default" />
+			}
+			<div class="input-group-addon"></div>
+		</div>
+	</div>
+	<table id="table" class="table table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th hidden>ID</th>
+				<th class="text-center">Rubrik</th>
+				<th class="text-center">Text</th>
+				<th class="text-center">Pris</th>
+				<th class="text-center">Datum</th>
+				<th class="text-center">Säljare</th>
+				<th class="text-center">Typ</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td hidden>@item.Id</td>
+					<td>
+						@Html.ActionLink(item.Rubrik, "Details", "Home", new { annonsId = item.Id }, new { })
+					</td>
+					<td>@item.Text</td>
+					<td>@item.Pris kr</td>
+					<td>@item.Datum</td>
+					<td>@item.User.Name</td>
+					<td>@string.Join(", ", item.Kategorier.Select(s => s.Name))</td>
+					<td class="text-center">
+						@if (item.User.Id == ViewBag.CurrentUser)
+						{
+							//insert real logic here instead of Delete but for this it does the same
+							@Html.ActionLink("Buy", "Delete", "Home", new { deleteId = item.Id }, new { @class = "btn btn-success" })
+						}
+						@if (item.User.Id != ViewBag.CurrentUser)
+						{
+							@Html.ActionLink("Edit", "EditView", "Home", new { editId = item.Id }, new { @class = "btn btn-info" })
+							@Html.ActionLink("Delete", "Delete", "Home", new { deleteId = item.Id }, new { @class = "btn btn-danger" })
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

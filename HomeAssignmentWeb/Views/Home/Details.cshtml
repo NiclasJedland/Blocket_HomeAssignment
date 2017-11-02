@@ -1,0 +1,54 @@
+﻿@model HomeAssignmentWeb.Models.vmDetails
+
+<h2>Details</h2>
+
+<div>
+	<h4>Annons</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Rubrik)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Rubrik)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Text)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Text)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Pris)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Pris)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Datum)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Datum)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Kategorier)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Kategorier)
+		</dd>
+
+	</dl>
+</div>
+<p>
+	@Html.ActionLink("Edit", "EditView", "Home", new { editId = Model.Id }, new { @class = "btn btn-info" })
+	@Html.ActionLink("Back to List", "IndexView")
+</p>
